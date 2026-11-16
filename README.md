@@ -31,6 +31,18 @@
 > [!TIP]
 > **A pre-trained model is included.** The repository ships with `ppo_profile.zip`, a trained PPO policy ready to evaluate or record. Use it immediately, or follow the training section to start from scratch and create your own policy.
 
+> [!TIP]
+> **Training is a flight test, not a one-click guarantee.** In general, giving PPO more timesteps gives the policy more chances to discover and refine a reliable suicide-burn strategy. Start with `500000` steps for a quick experiment, then try `2000000` or more for a stronger policy. Watch evaluation results as you go: longer training often helps, but improvement can plateau or vary with the seed.
+
+### A few ways to improve your catches
+
+- Keep the curriculum enabled while the agent is learning; it lets the policy master forgiving landings before facing tight tolerances.
+- Use more parallel environments when your machine has spare CPU cores: `--envs 8` is a good starting point, while `--envs 4` may be better on a smaller laptop.
+- Compare policies at the same difficulty and number of episodes with `evaluate.py`; a training reward alone does not prove that the booster can be caught.
+- Use `--device cuda` when a compatible CUDA GPU is available, or keep `--device auto` to let Stable-Baselines3 choose automatically.
+- The `profile` reward is the recommended starting point because it teaches altitude-aware braking instead of rewarding the booster for hovering.
+- Save interesting experiments under distinct names or copy the resulting `ppo_<variant>.zip` before starting another run.
+
 ## The mission
 
 The booster starts hundreds of metres above the tower, falling fast and carrying limited fuel. At the catch height, the policy must satisfy all of these conditions at once:
