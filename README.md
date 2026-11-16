@@ -28,6 +28,9 @@
 
 ---
 
+> [!TIP]
+> **A pre-trained model is included.** The repository ships with `ppo_profile.zip`, a trained PPO policy ready to evaluate or record. Use it immediately, or follow the training section to start from scratch and create your own policy.
+
 ## The mission
 
 The booster starts hundreds of metres above the tower, falling fast and carrying limited fuel. At the catch height, the policy must satisfy all of these conditions at once:
